@@ -97,6 +97,12 @@ func main() {
 			Usage:  "If the hugo extended package should be used",
 			EnvVar: "PLUGIN_EXTENDED",
 		},
+		cli.StringFlag{
+			Name:   "npm",
+			Usage:  "the hugo version to be used",
+			EnvVar: "NPM",
+			Value:  "",
+		},
 	}
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
@@ -119,6 +125,7 @@ func run(c *cli.Context) error {
 			Theme:    c.String("theme"),
 			Version:  c.String("hugoversion"),
 			Extended: c.Bool("extended"),
+                        NPM:      c.String("npm"),
 		},
 		BuildInVersion: os.Getenv("PLUGIN_HUGO_SHIPPED_VERSION"),
 	}

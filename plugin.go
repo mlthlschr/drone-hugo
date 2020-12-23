@@ -30,6 +30,7 @@ type (
 		Theme    string
 		Version  string
 		Extended bool
+                NPM      string
 	}
 )
 
@@ -62,6 +63,10 @@ func (p Plugin) Exec() error {
 
 		hugoExecutable = executable
 	}
+
+        if p.Config.NPM != "" {
+            cmds = append(cmds, exec.Command("npm","install postcss"))
+        }
 
 	if p.Config.Validate {
 		cmds = append(cmds, commandValidate(p.Config))
